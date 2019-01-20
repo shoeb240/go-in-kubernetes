@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: go-app
+  labels:
+        app: go-app
+
+spec:
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: go-app
+
+    spec:
+      containers:
+      - image: go-built-app:1.1
+        name: go-built-app
+        volumeMounts:
+          - name: my-host-path
+            mountPath: /go/src
+
+      volumes:
+      - name: my-host-path
+        hostPath:
+          path: /Users/shoeb240/go/src/github.com/shoeb240/go-in-kubernetes
+          type: Directory
