@@ -1,5 +1,5 @@
 # Go in Kubernetes
-Single node cluster to host go application with minimum effort
+Single node cluster orchestration for go application with minimum effort
 
 ## Kubernetes Installation
 Installion instruction for 
@@ -14,7 +14,7 @@ minikube start
 To install and run Kubernetes on Mac follow [this](https://rominirani.com/tutorial-getting-started-with-kubernetes-with-docker-on-mac-7f58467203fd)
 
 ## Docker Image
-dockerfile
+[Dockerfile](https://github.com/shoeb240/go-in-kubernetes/blob/master/Dockerfile)
 ```dockerfile
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -117,7 +117,7 @@ One of the most common Kubernetes object is the deployment object. The deploymen
 
 We will create container using image go-built-app in 3 pods.
 
-deployment.yaml
+[deployment.yaml](https://github.com/shoeb240/go-in-kubernetes/blob/master/deployment.yaml)
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -173,21 +173,21 @@ We cannot yet access the app because port is not exposed outside world. We need 
 ## Service
 Kubernetes has powerful networking capabilities that control how applications communicate. Service is assigned a unique IP address (also called clusterIP). 
 
-[service.yaml](https://github.com/shoeb240/easy-kubernetes-nginx-php/blob/master/service.yaml)
+[service.yaml](https://github.com/shoeb240/go-in-kubernetes/blob/master/service.yaml)
 ```
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: go-app-service
   labels:
-    app: my-app
+    app: go-app
 spec:
   type: NodePort
   ports:
-  - port: 80
-    nodePort: 30080
+  - port: 8081
+    nodePort: 30081
   selector:
-    app: my-app
+    app: go-app
 ```
 
 Run kubectl command:
